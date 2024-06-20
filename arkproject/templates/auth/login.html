@@ -1,0 +1,65 @@
+{% extends 'nav.html' %}
+{% block title %}
+AispaceX Login
+{% endblock title %}
+
+{% block style %}
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .card {
+        animation: fadeIn 2s ease-in-out;
+    }
+   
+</style>
+
+   
+{% endblock style %}
+
+{% block body %}
+<br>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg- text-white mt-5" style="animation: fadeIn 2s ease-in-out;">
+                <div class="card-body">
+                    
+                    <form action="/arkauth/login/" method="post">{% csrf_token %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fadeshow" role="alert">
+                            <strong>{{ message }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                        <h2 class="card-title text-center text-dark">LogIn</h2>
+                        <div class="form-group">
+                            <label for="email">Username:</label>
+                            <input type="text" class="form-control" name="username" id="email" placeholder="Enter your username">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Password:</label>
+                            <input type="password" class="form-control" id="email" name="pass1" placeholder="Enter your password">
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary text-white btn-block text-center ">Login</button>
+                        <br>
+                        <p class="text-dark text-center">Dont have an account? <span><a href="/arkauth/signup">Signup</a></span> </p><br>
+                        <p class="text-dark text-center">Forgot password? <span><a href="/arkauth/request-reset-email">reset</a></span> </p>  
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}

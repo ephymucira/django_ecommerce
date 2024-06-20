@@ -1,0 +1,62 @@
+{% extends 'nav.html' %}
+{% block title %}
+AispaceX reset-password
+{% endblock title %}
+
+{% block style %}
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    .card {
+        animation: fadeIn 2s ease-in-out;
+    }
+   
+</style>
+
+   
+{% endblock style %}
+
+{% block body %}
+<br>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg- text-white mt-5" style="animation: fadeIn 2s ease-in-out;">
+                <div class="card-body">
+                    
+                    <form action="/arkauth/request-reset-email/" method="post">{% csrf_token %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fadeshow" role="alert">
+                            <strong>{{ message }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                        <h2 class="card-title text-center text-dark">Request Email for Reset Password</h2>
+                        <div class="form-group">
+                            <label for="email">email:</label>
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Enter your username">
+                        </div>
+                        
+                        <br>
+                        <button type="submit" class="btn btn-primary text-white btn-block text-center ">submit</button>
+                        <br>
+                        <p class="text-dark text-center"><span><a href="/arkauth/login">Go back</a></span> </p><br>
+                          
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
